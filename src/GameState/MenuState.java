@@ -32,11 +32,11 @@ public class MenuState extends GameState {
 			
 			titleColor = new Color(128, 0, 0);
 			titleFont = new Font(
-					"Century Gothic",
+					"Times New Roman",
 					Font.PLAIN,
 					28);
 			
-			font = new Font("Arial", Font.PLAIN, 12);
+			font = new Font("Times New Roman", Font.PLAIN, 12);
 			
 		}
 		catch(Exception e) {
@@ -80,7 +80,7 @@ public class MenuState extends GameState {
 			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 		if(currentChoice == 1) {
-			// help
+			gsm.setState(GameStateManager.HELP);
 		}
 		if(currentChoice == 2) {
 			System.exit(0);

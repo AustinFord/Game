@@ -1,10 +1,13 @@
 package Entity;
 
+import Main.GamePanel;
 import TileMap.*;
 import Audio.AudioPlayer;
 
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -130,9 +133,9 @@ public class Player extends MapObject {
 		animation.setFrames(sprites.get(IDLE));
 		animation.setDelay(400);
 		
-		//sfx = new HashMap<String, AudioPlayer>();
-		//sfx.put("jump", new AudioPlayer("/SFX/jump.mp3"));
-	//	sfx.put("scratch", new AudioPlayer("/SFX/scratch.mp3"));
+		sfx = new HashMap<String, AudioPlayer>();
+		sfx.put("jump", new AudioPlayer("/SFX/jump.mp3"));
+		sfx.put("scratch", new AudioPlayer("/SFX/scratch.mp3"));
 		
 	}
 	
@@ -200,6 +203,20 @@ public class Player extends MapObject {
 		
 	}
 	
+	public void resetHeath()
+	{
+		if(isDead() == true)
+		{
+			health = maxHealth;
+			
+		}
+		
+	}
+	public boolean isDead()
+	{
+		return dead;
+		
+	}
 	public void hit(int damage) {
 		if(flinching) return;
 		health -= damage;
@@ -248,7 +265,7 @@ public class Player extends MapObject {
 		
 		// jumping
 		if(jumping && !falling) {
-		//	sfx.get("jump").play();
+			sfx.get("jump").play();
 			dy = jumpStart;
 			falling = true;
 		}
@@ -274,6 +291,15 @@ public class Player extends MapObject {
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
+		
+		
+		
+		if(y + (height / 2) >= GamePanel.HEIGHT )
+		{
+			
+			dead = true;
+			
+		}
 		
 		// check attack has stopped
 		if(currentAction == SCRATCHING) {
@@ -316,7 +342,7 @@ public class Player extends MapObject {
 		// set animation
 		if(scratching) {
 			if(currentAction != SCRATCHING) {
-			//	sfx.get("scratch").play();
+				sfx.get("scratch").play();
 				currentAction = SCRATCHING;
 				animation.setFrames(sprites.get(SCRATCHING));
 				animation.setDelay(50);

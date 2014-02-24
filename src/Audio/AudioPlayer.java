@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 
 public class AudioPlayer {
 	
-/*	private Clip clip;
+	private Clip clip;
 	
 	public AudioPlayer(String s) {
 		
@@ -53,7 +53,7 @@ public class AudioPlayer {
 		stop();
 		clip.close();
 	}
-*/	
+	
 }
 
 

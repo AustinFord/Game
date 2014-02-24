@@ -22,7 +22,7 @@ public class Level1State extends GameState {
 	
 	private HUD hud;
 	
-	//private AudioPlayer bgMusic;
+	private AudioPlayer bgMusic;
 	
 	public Level1State(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -48,8 +48,8 @@ public class Level1State extends GameState {
 		
 		hud = new HUD(player);
 		
-		//bgMusic = new AudioPlayer("/Music/level1-1.mp3");
-		//bgMusic.play();
+		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
+		bgMusic.play();
 		
 	}
 	
@@ -87,6 +87,13 @@ public class Level1State extends GameState {
 		
 		// attack enemies
 		player.checkAttack(enemies);
+		
+		//check if dead
+		if(player.isDead())
+		{
+			gsm.setState(GameStateManager.DEAD);
+			
+		}
 		
 		// update all enemies
 		for(int i = 0; i < enemies.size(); i++) {
